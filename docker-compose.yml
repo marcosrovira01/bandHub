@@ -1,0 +1,81 @@
+services:
+  config-server:
+    build:
+      context: ./config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - bandhub-network
+
+  eureka-server:
+    build:
+      context: ./eureka-server
+    ports:
+      - "8081:8080"
+    depends_on:
+      - config-server
+    networks:
+      - bandhub-network
+
+  auth-service:
+    build:
+      context: ./auth-service
+    ports:
+      - "8082:8080"
+    depends_on:
+      - config-server
+      - eureka-server
+    networks:
+      - bandhub-network
+
+  agrupations-service:
+    build:
+      context: ./agrupations-service
+    ports:
+      - "8083:8080"
+    depends_on:
+      - config-server
+      - eureka-server
+    networks:
+      - bandhub-network
+
+  musics-service:
+    build:
+      context: ./musics-service
+    ports:
+      - "8084:8080"
+    depends_on:
+      - config-server
+      - eureka-server
+    networks:
+      - bandhub-network
+
+  events-service:
+    build:
+      context: ./events-service
+    ports:
+      - "8085:8080"
+    depends_on:
+      - config-server
+      - eureka-server
+    networks:
+      - bandhub-network
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - config-server
+      - eureka-server
+      - auth-service
+      - agrupations-service
+      - musics-service
+      - events-service
+    networks:
+      - bandhub-network
+
+networks:
+  bandhub-network:
+    driver: bridge
