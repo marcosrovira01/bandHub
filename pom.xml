@@ -4,7 +4,7 @@
     <groupId>com.bandhub</groupId>
     <artifactId>bandhub</artifactId>
     <!--Version of the application-->
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>BandHub</name>
@@ -13,13 +13,14 @@
     <!--Version of the dependencies-->
     <properties>
         <java.version>17</java.version>
-        <spring-boot.version>3.3.1</spring-boot.version>
-        <spring-cloud.version>2023.0.2</spring-cloud.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
+        <spring-cloud.version>2021.0.9</spring-cloud.version>
         <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <jsonwebtoken.version>0.12.5</jsonwebtoken.version>
         <mockito.version>5.12.0</mockito.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <spring-boot-maven-plugin.version>3.3.1</spring-boot-maven-plugin.version>
     </properties>
 
     <!--MicroServices-->
@@ -104,6 +105,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
